@@ -4,5 +4,5 @@ public interface DataReceiverCallBack {
 
     void netSuccess(String data);
 
-    void netFail() ;
+    void netFail(String faildata) ;
 }

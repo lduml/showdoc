@@ -4,9 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,15 +38,18 @@ import com.lduml.oc.androidokhttpwithcookie.Http.DataReceiverCallBack;
 import com.lduml.oc.androidokhttpwithcookie.Http.NetOkhttp;
 import com.lduml.oc.androidokhttpwithcookie.Util.ImageDispose;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.FormBody;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static com.lduml.oc.androidokhttpwithcookie.Global.ITEM_LIST_URL;
+import static com.lduml.oc.androidokhttpwithcookie.Global.LOGIN_URL;
+import static com.lduml.oc.androidokhttpwithcookie.Global.VERIFY_URL;
 
 /**
  * A login screen that offers login via email/password.
@@ -76,13 +79,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView,edt_vcode;
     private View mProgressView;
     private View mLoginFormView;
-    public static Context mcontext;
+
     private Bitmap mbmp;
+    public String TAG = "001-LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mcontext = this;
+
         // Set up the login form.
         imv = (ImageView) findViewById(R.id.iv_vcode);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -91,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         edt_vcode = (EditText) findViewById(R.id.edt_vcode);
         mPasswordView = (EditText) findViewById(R.id.password);
 
-        NetOkhttp.init_OkHttpClient();
+
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -117,14 +121,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
 
-                NetOkhttp.get_show_list_with_cookie(new DataReceiverCallBack() {
+                NetOkhttp.http_get_with_cookie(ITEM_LIST_URL,new DataReceiverCallBack() {
                     @Override
                     public void netSuccess(String data) {
 
                     }
 
                     @Override
-                    public void netFail() {
+                    public void netFail(String faildata) {
 
                     }
                 });
@@ -136,25 +140,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
         Log.d("001", "onCreate: 001");
 
-
         imv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 get_vcode();
             }
         });
-      //  get_vcode();
+        get_vcode();
     }
     public void get_vcode(){
 
-        NetOkhttp.sync_doGet(mcontext,"https://www.showdoc.cc/server/index.php?s=/api/common/verify", new DataReceiverCallBack() {
+        NetOkhttp.sync_doGet(VERIFY_URL, new DataReceiverCallBack() {
             @Override
             public void netSuccess(String data) {
-                Log.d("001", "onCreate: netSuccess");
+               Log.d(TAG, "vcode -- netSuccess"+data);
                 try{
                     mbmp =  ImageDispose.IOStream2Bitmap(NetOkhttp.is);
+                  //  NetOkhttp.is.close();
                 }catch (Exception e){
-                    Log.d("001", "netSuccess: e"+e);
+                    Log.d(TAG, "Exception: e"+e);
                 }
                 runOnUiThread(new Runnable() {
                     @Override
@@ -165,8 +169,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             @Override
-            public void netFail() {
-
+            public void netFail(String faildata) {
+                Log.d(TAG, "get_vcode---netFail"+faildata);
             }
         });
     }
@@ -268,15 +272,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     .add("username", email)
                     .add("v_code", vcode)
                     .build();
-                NetOkhttp.doPostWithCookie(mcontext, "https://www.showdoc.cc/server/index.php?s=/api/user/login", body, new DataReceiverCallBack() {
+                NetOkhttp.HttpLoginGetItemListPostWithCookie(LOGIN_URL,ITEM_LIST_URL, body, new DataReceiverCallBack() {
                     @Override
                     public void netSuccess(String data) {
+                        Log.d(TAG, "login netSuccess: "+data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            int error_code = jsonObject.optInt("error_code");
+                            if(error_code==0){
+                                Log.d(TAG, "login netSuccess: "+"登录成功");
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else if(error_code==10210){
+                                /*{
+                                  "error_code": 10210,
+                                  "error_message": "\u7528\u6237\u540d\u6216\u5bc6\u7801\u4e0d\u6b63\u786e"
+                                }*/
+                                Log.d(TAG, "login netSuccess: "+"登录失败，账号或密码不正确");
+                                //todo toast or show error infor in textview, and other error type
+                            }
+                        }catch (JSONException e){
+                            Log.d(TAG, "JSONException: "+e);
+                        }
 
                     }
 
                     @Override
-                    public void netFail() {
-
+                    public void netFail(String faildata) {
+                        Log.d(TAG, "login faildata: "+faildata);
                     }
                 });
 
@@ -411,23 +435,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            FormBody body = new FormBody.Builder()
+           /* FormBody body = new FormBody.Builder()
                     .add("password", mPassword)
                     .add("username", mEmail)
                     .add("v_code", mVcode)
-                    .build();
+                    .build();*/
             try {
-                NetOkhttp.doPostWithCookie(mcontext, "https://www.showdoc.cc/server/index.php?s=/api/user/login", body, new DataReceiverCallBack() {
+               /* NetOkhttp.HttpPostWithCookie(LOGIN_URL, body, new DataReceiverCallBack() {
                     @Override
                     public void netSuccess(String data) {
 
                     }
 
                     @Override
-                    public void netFail() {
-
+                    public void netFail(String faildata) {
+                        Log.d(TAG, "netFail: ");
                     }
-                });
+                });*/
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
