@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie;
+package com.lduml.showdoc;
 
 public class SampleChildBean {
     private String mName;

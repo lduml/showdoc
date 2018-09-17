@@ -1,12 +1,10 @@
-package com.lduml.oc.androidokhttpwithcookie.Http;
+package com.lduml.showdoc.Http;
 
 import android.content.Context;
 import android.util.Log;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-
-import org.json.JSONObject;
+import com.persistent.cookiejar.PersistentCookieJar;
+import com.persistent.cookiejar.cache.SetCookieCache;
+import com.persistent.cookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,7 +1,7 @@
 /**
   * Copyright 2018 bejson.com 
   */
-package com.lduml.oc.androidokhttpwithcookie.model;
+package com.lduml.showdoc.model;
 
 /**
  * Auto-generated: 2018-09-16 8:48:13

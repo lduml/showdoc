@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.lduml.oc.androidokhttpwithcookie"
+        applicationId "com.lduml.showdoc"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -31,8 +31,18 @@ dependencies {
     implementation files('libs/okio-1.8.0.jar')
     // https://mvnrepository.com/artifact/com.alibaba/fastjson
     //json
-    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.49'
+    //implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.49'
 
+    // https://mvnrepository.com/artifact/net.sf.json-lib/json-lib
+    //implementation group: 'net.sf.json-lib', name: 'json-lib', version: '2.4'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    //implementation 'net.sf.json-lib:json-lib:2.3'
     //图片处理
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    implementation project(':recycler_adapter')
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.3'
 }

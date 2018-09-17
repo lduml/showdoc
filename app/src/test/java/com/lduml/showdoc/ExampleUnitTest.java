@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie;
+package com.lduml.showdoc;
 
 import org.junit.Test;
 

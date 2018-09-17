@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie;
+package com.lduml.showdoc;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -34,9 +34,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lduml.oc.androidokhttpwithcookie.Http.DataReceiverCallBack;
-import com.lduml.oc.androidokhttpwithcookie.Http.NetOkhttp;
-import com.lduml.oc.androidokhttpwithcookie.Util.ImageDispose;
+import com.lduml.showdoc.Http.DataReceiverCallBack;
+import com.lduml.showdoc.Http.NetOkhttp;
+import com.lduml.showdoc.Util.ImageDispose;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,9 +47,9 @@ import java.util.List;
 import okhttp3.FormBody;
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static com.lduml.oc.androidokhttpwithcookie.Global.ITEM_LIST_URL;
-import static com.lduml.oc.androidokhttpwithcookie.Global.LOGIN_URL;
-import static com.lduml.oc.androidokhttpwithcookie.Global.VERIFY_URL;
+import static com.lduml.showdoc.Global.ITEM_LIST_URL;
+import static com.lduml.showdoc.Global.LOGIN_URL;
+import static com.lduml.showdoc.Global.VERIFY_URL;
 
 /**
  * A login screen that offers login via email/password.

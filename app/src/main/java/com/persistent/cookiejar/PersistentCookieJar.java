@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.franmontiel.persistentcookiejar;
+package com.persistent.cookiejar;
 
-import com.franmontiel.persistentcookiejar.cache.CookieCache;
-import com.franmontiel.persistentcookiejar.persistence.CookiePersistor;
+import com.persistent.cookiejar.cache.CookieCache;
+import com.persistent.cookiejar.persistence.CookiePersistor;
 
 import java.util.ArrayList;
 import java.util.Iterator;

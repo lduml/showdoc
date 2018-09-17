@@ -9,9 +9,17 @@ package com.lduml.showdoc.model;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Pages {
+public class PagesChildBean {
+    public Pages mPages;
+    public PagesChildBean(Pages pages){
+        mPages = pages;
+    }
 
-    private String page_id;
+    public Pages getmPages() {
+        return mPages;
+    }
+
+   /* private String page_id;
     private String author_uid;
     private String cat_id;
     private String page_title;
@@ -60,5 +68,5 @@ public class Pages {
                 ", page_title='" + page_title + '\'' +
                 ", addtime='" + addtime + '\'' +
                 '}';
-    }
+    }*/
 }

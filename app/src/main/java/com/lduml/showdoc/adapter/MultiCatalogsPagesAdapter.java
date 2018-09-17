@@ -1,6 +1,7 @@
 package com.lduml.showdoc.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,26 @@ import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
 import com.lduml.showdoc.R;
 import com.lduml.showdoc.SampleChildBean;
 import com.lduml.showdoc.SampleGroupBean;
+import com.lduml.showdoc.inter.MyOnItemClickListener;
+import com.lduml.showdoc.model.CatalogsGroupBean;
+import com.lduml.showdoc.model.PagesChildBean;
 
 import java.util.List;
 
-public class MultiChildAdapter extends
-        BaseExpandableRecyclerViewAdapter<SampleGroupBean, SampleChildBean, MultiChildAdapter.GroupVH, MultiChildAdapter.ChildVH> {
+public class MultiCatalogsPagesAdapter extends
+        BaseExpandableRecyclerViewAdapter<CatalogsGroupBean, PagesChildBean, MultiCatalogsPagesAdapter.GroupVH, MyChildItemViewHolder> {
+    private String TAG = "001-MultiCatalogsPagesAdapter";
+    private List<CatalogsGroupBean> mList;
 
-    private List<SampleGroupBean> mList;
+    private MyOnItemClickListener mListener;// 声明自定义的接口
 
-    public MultiChildAdapter(List<SampleGroupBean> list) {
+    public MultiCatalogsPagesAdapter(List<CatalogsGroupBean> list) {
         mList = list;
+    }
+
+    @Override
+    public void childItemOnclick(CatalogsGroupBean groupBean, PagesChildBean pagesChildBean) {
+        Log.d(TAG, "8888888:         childItemOnclick: "+groupBean.getCatalogs().toString());
     }
 
     @Override
@@ -29,7 +40,7 @@ public class MultiChildAdapter extends
     }
 
     @Override
-    public SampleGroupBean getGroupItem(int position) {
+    public CatalogsGroupBean getGroupItem(int position) {
         return mList.get(position);
     }
 
@@ -43,17 +54,40 @@ public class MultiChildAdapter extends
 
     /*子菜单*/
     @Override
-    public ChildVH onCreateChildViewHolder(ViewGroup parent, int childViewType) {
-        return new ChildVH(
+    public MyChildItemViewHolder onCreateChildViewHolder(ViewGroup parent, int childViewType) {
+        MyChildItemViewHolder mChildVH = new MyChildItemViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.child_item_listitem_child, parent, false));
+                        .inflate(R.layout.child_item_listitem_child, parent, false),mListener);
+        /*return new ChildVH(
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.child_item_listitem_child, parent, false));*/
+       /* mChildVH.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ChildVH");
+            }
+        });
+        mChildVH.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Log.d(TAG, "onLongClick: ");
+                return false;
+            }
+        });*/
+
+        return mChildVH;
+    }
+
+    //传递
+    public void setOnItemClickListener(MyOnItemClickListener listener) {
+        this.mListener = listener;
     }
 
     /*父菜单*/
     @Override
-    public void onBindGroupViewHolder(GroupVH holder, SampleGroupBean sampleGroupBean, boolean isExpanding) {
-        holder.nameTv.setText(sampleGroupBean.getName());
-        if (sampleGroupBean.isExpandable()) {
+    public void onBindGroupViewHolder(GroupVH holder, CatalogsGroupBean mCatalogsGroupBean, boolean isExpanding) {
+        holder.nameTv.setText(mCatalogsGroupBean.getCatalogs().getCat_name());
+        if (mCatalogsGroupBean.isExpandable()) {
             holder.foldIv.setVisibility(View.VISIBLE);
             holder.foldIv.setImageResource(isExpanding ? R.drawable.ic_arrow_expanding : R.drawable.ic_arrow_folding);
         } else {
@@ -63,16 +97,25 @@ public class MultiChildAdapter extends
 
     /*子菜单*/
     @Override
-    public void onBindChildViewHolder(ChildVH holder, SampleGroupBean groupBean, SampleChildBean sampleChildBean) {
-        holder.nameTv.setText(sampleChildBean.getName());
+    public void onBindChildViewHolder(MyChildItemViewHolder holder, CatalogsGroupBean mCatalogsGroupBean, PagesChildBean mPagesChildBean) {
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+            }
+        });*/
+        holder.nameTv.setText(mPagesChildBean.getmPages().getPage_title());
     }
+
+
+
 
     /*父菜单*/
     public class GroupVH extends BaseExpandableRecyclerViewAdapter.BaseGroupViewHolder {
         ImageView foldIv;
         TextView nameTv;
 
-        GroupVH(View itemView) {
+        public GroupVH(View itemView) {
             super(itemView);
             foldIv = (ImageView) itemView.findViewById(R.id.group_item_indicator);
             nameTv = (TextView) itemView.findViewById(R.id.group_item_name);
@@ -84,13 +127,20 @@ public class MultiChildAdapter extends
         }
     }
 
-    /*子菜单*/
+   /* *//*子菜单*/
+
+  /*  @Override
+    public void setListener(ExpandableRecyclerViewOnClickListener<CatalogsGroupBean, PagesChildBean> listener) {
+        super.setListener(listener);
+        listener.onChildClicked();
+        listener.onGroupClicked();
+    }*//*
     public class ChildVH extends RecyclerView.ViewHolder {
         TextView nameTv;
 
-        ChildVH(View itemView) {
+        public ChildVH(View itemView) {
             super(itemView);
             nameTv = (TextView) itemView.findViewById(R.id.child_item_name);
         }
-    }
+    }*/
 }

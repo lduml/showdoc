@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie.adapter;
+package com.lduml.showdoc.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.lduml.oc.androidokhttpwithcookie.R;
-import com.lduml.oc.androidokhttpwithcookie.inter.MyOnItemClickListener;
-import com.lduml.oc.androidokhttpwithcookie.model.ItemDataList;
+import com.lduml.showdoc.R;
+import com.lduml.showdoc.inter.MyOnItemClickListener;
+import com.lduml.showdoc.model.ItemDataList;
 import java.util.List;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;

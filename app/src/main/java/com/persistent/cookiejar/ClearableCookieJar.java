@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.franmontiel.persistentcookiejar;
+package com.persistent.cookiejar;
 
 import okhttp3.CookieJar;
 

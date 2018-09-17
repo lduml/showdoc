@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.franmontiel.persistentcookiejar.persistence;
+package com.persistent.cookiejar.persistence;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.lduml.showdoc;
+package com.lduml.showdoc.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
+import com.lduml.showdoc.R;
+import com.lduml.showdoc.SampleChildBean;
+import com.lduml.showdoc.SampleGroupBean;
 
 import java.util.List;
 
@@ -18,6 +21,11 @@ public class MultiChildAdapter extends
 
     public MultiChildAdapter(List<SampleGroupBean> list) {
         mList = list;
+    }
+
+    @Override
+    public void childItemOnclick(SampleGroupBean groupBean, SampleChildBean sampleChildBean) {
+
     }
 
     @Override

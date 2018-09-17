@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie;
+package com.lduml.showdoc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

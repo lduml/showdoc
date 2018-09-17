@@ -1,7 +1,7 @@
 /**
   * Copyright 2018 bejson.com 
   */
-package com.lduml.oc.androidokhttpwithcookie.model;
+package com.lduml.showdoc.model;
 import java.util.List;
 
 /**
@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class Menu {
 
-    private List<String> pages;
+    private List<Pages> pages;
     private List<Catalogs> catalogs;
-    public void setPages(List<String> pages) {
+    public void setPages(List<Pages> pages) {
          this.pages = pages;
      }
-     public List<String> getPages() {
+     public List<Pages> getPages() {
          return pages;
      }
 

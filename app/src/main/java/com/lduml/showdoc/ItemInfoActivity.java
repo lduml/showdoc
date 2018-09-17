@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie;
+package com.lduml.showdoc;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

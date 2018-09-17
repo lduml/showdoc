@@ -1,4 +1,4 @@
-package com.recycler.tree.adapter;
+package com.lduml.showdoc.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.recycler.tree.entity.ParentEntity;
+import com.lduml.showdoc.entity.ParentEntity;
 
 import java.util.List;
 

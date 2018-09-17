@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie.adapter;
+package com.lduml.showdoc.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lduml.oc.androidokhttpwithcookie.R;
-import com.lduml.oc.androidokhttpwithcookie.inter.MyOnItemClickListener;
+import com.lduml.showdoc.R;
+import com.lduml.showdoc.inter.MyOnItemClickListener;
 
 public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
  //   TextView textView;

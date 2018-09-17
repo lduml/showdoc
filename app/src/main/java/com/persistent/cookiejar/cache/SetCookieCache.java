@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.franmontiel.persistentcookiejar.cache;
+package com.persistent.cookiejar.cache;
 
 import java.util.Collection;
 import java.util.HashSet;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.franmontiel.persistentcookiejar.persistence;
+package com.persistent.cookiejar.persistence;
 
 import java.util.Collection;
 import java.util.List;

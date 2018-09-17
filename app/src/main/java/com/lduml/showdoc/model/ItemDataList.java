@@ -1,4 +1,4 @@
-package com.lduml.oc.androidokhttpwithcookie.model;
+package com.lduml.showdoc.model;
 
 public class ItemDataList {
 

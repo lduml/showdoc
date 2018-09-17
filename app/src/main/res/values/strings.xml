@@ -3,6 +3,8 @@
 
     <string name="get_item_name">Python开发</string>
 
+    <string name="header">header</string>
+    <string name="empty">empty</string>
     <!-- Strings related to login -->
     <string name="prompt_user">User</string>
     <string name="prompt_email">Email</string>
