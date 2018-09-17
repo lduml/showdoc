@@ -1,7 +1,7 @@
 /**
   * Copyright 2018 bejson.com 
   */
-package com.lduml.oc.androidokhttpwithcookie.model;
+package com.lduml.showdoc.model;
 import java.util.List;
 
 /**
@@ -84,4 +84,18 @@ public class Catalogs {
          return catalogs;
      }
 
+    @Override
+    public String toString() {
+        return "Catalogs{" +
+                "cat_id='" + cat_id + '\'' +
+                ", cat_name='" + cat_name + '\'' +
+                ", item_id='" + item_id + '\'' +
+                ", s_number='" + s_number + '\'' +
+                ", addtime='" + addtime + '\'' +
+                ", parent_cat_id='" + parent_cat_id + '\'' +
+                ", level='" + level + '\'' +
+                ", pages=" + pages +
+                ", catalogs=" + catalogs +
+                '}';
+    }
 }

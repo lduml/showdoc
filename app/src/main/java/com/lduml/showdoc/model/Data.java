@@ -115,4 +115,22 @@ public class Data {
          return ItemCreator;
      }
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "item_id='" + item_id + '\'' +
+                ", item_domain='" + item_domain + '\'' +
+                ", is_archived='" + is_archived + '\'' +
+                ", item_name='" + item_name + '\'' +
+                ", default_page_id='" + default_page_id + '\'' +
+                ", default_cat_id2=" + default_cat_id2 +
+                ", default_cat_id3=" + default_cat_id3 +
+                ", unread_count='" + unread_count + '\'' +
+                ", item_type=" + item_type +
+                ", menu=" + menu +
+                ", is_login=" + is_login +
+                ", ItemPermn=" + ItemPermn +
+                ", ItemCreator=" + ItemCreator +
+                '}';
+    }
 }

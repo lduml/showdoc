@@ -28,4 +28,11 @@ public class Menu {
          return catalogs;
      }
 
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "pages=" + pages +
+                ", catalogs=" + catalogs +
+                '}';
+    }
 }

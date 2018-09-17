@@ -8,12 +8,21 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
-import com.alibaba.fastjson.JSON;
+/*import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;*/
+import com.google.gson.Gson;
 import com.lduml.oc.androidokhttpwithcookie.Http.DataReceiverCallBack;
 import com.lduml.oc.androidokhttpwithcookie.Http.NetOkhttp;
 import com.lduml.oc.androidokhttpwithcookie.adapter.ItemDataAdapter;
+import com.lduml.oc.androidokhttpwithcookie.inter.MyOnItemClickListener;
+import com.lduml.oc.androidokhttpwithcookie.model.Catalogs;
+import com.lduml.oc.androidokhttpwithcookie.model.Data;
 import com.lduml.oc.androidokhttpwithcookie.model.ItemDataList;
+import com.lduml.oc.androidokhttpwithcookie.model.ItemInforBean;
+import com.lduml.oc.androidokhttpwithcookie.model.Menu;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +31,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.FormBody;
+
+import static com.lduml.oc.androidokhttpwithcookie.Global.ITEM_INFO_URL;
 import static com.lduml.oc.androidokhttpwithcookie.Global.ITEM_LIST_URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +55,22 @@ public class MainActivity extends AppCompatActivity {
         NetOkhttp.init_OkHttpClient(this);
         init_mRecycleritemdataView();
 
+        mItemDataAdapter.setOnItemClickListener(new MyOnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int postion) {
+                /*item_id:52508281797728
+                    keyword:
+                    default_page_id:0*/
+                Log.d(TAG, "onItemClick: "+mItemDataList.get(postion).toString());
+                String item_id = mItemDataList.get(postion).getItem_id();
+                http_post_get_item_infor(item_id,"","0");
+            }
+
+            @Override
+            public void onItemLongClick(View view, int postion) {
+                Log.d(TAG, "onItemLongClick: ");
+            }
+        });
     }
 
     @Override
@@ -55,6 +83,55 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         /*获取itemlist 数据*/
         get_item_list();
+
+    }
+
+    /*item_id:52508281797728
+        keyword:
+        default_page_id:0*/
+    public void http_post_get_item_infor(String item_id,String keyword,String default_page_id){
+        FormBody body = new FormBody.Builder()
+                    .add("item_id", item_id)
+                    .add("keyword", keyword)
+                    .add("default_page_id", default_page_id)
+                    .build();
+        NetOkhttp.HttpPostWithCookie(ITEM_INFO_URL,body , new DataReceiverCallBack() {
+            @Override
+            public void netSuccess(String data) {
+                Log.d(TAG, "http_post_get_item_infor netSuccess: "+data);
+                try {
+                    Gson gson= new Gson();
+                    /*JSONObject jsonobject = JSONObject.fromObject(jsonStr);
+　　                  User user= (User)JSONObject.toBean(object,User.class);*/
+                    JSONObject jsonObject = new JSONObject(data);
+                    int error_code = jsonObject.optInt("jsonObject");
+                    if(error_code == 0){
+                        ItemInforBean itemInforBean = gson.fromJson(data, ItemInforBean.class);
+                        Log.d(TAG, "\nitemInforBean: "+itemInforBean.toString());
+                        Data info_data = itemInforBean.getData();
+                        Log.d(TAG, "\ninfo_data: "+info_data.toString());
+                        Menu menu = info_data.getMenu();
+                        Log.d(TAG, "\nmenu: "+menu.toString());
+                        List<String> pages_list = menu.getPages();
+                        for(int i=0;i<pages_list.size();i++){
+                            Log.d(TAG, "\npages_list: "+pages_list.get(i));
+                        }
+                        List<Catalogs> catalogs_list = menu.getCatalogs();
+                        for(int i=0;i<catalogs_list.size();i++){
+                            Log.d(TAG, "\ncatalogs_list: "+catalogs_list.get(i));
+                        }
+                       // String info_data = jsonObject.optString("data");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void netFail(String faildata) {
+
+            }
+        });
 
     }
 

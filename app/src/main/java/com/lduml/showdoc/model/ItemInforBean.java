@@ -27,4 +27,11 @@ public class ItemInforBean {
          return data;
      }
 
+    @Override
+    public String toString() {
+        return "ItemInforBean{" +
+                "error_code=" + error_code +
+                ", data=" + data +
+                '}';
+    }
 }

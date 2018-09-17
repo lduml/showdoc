@@ -51,4 +51,14 @@ public class Pages {
          return addtime;
      }
 
+    @Override
+    public String toString() {
+        return "Pages{" +
+                "page_id='" + page_id + '\'' +
+                ", author_uid='" + author_uid + '\'' +
+                ", cat_id='" + cat_id + '\'' +
+                ", page_title='" + page_title + '\'' +
+                ", addtime='" + addtime + '\'' +
+                '}';
+    }
 }
