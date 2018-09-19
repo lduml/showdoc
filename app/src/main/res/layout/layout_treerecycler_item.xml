@@ -17,5 +17,14 @@
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
         android:text="爬虫开发"/>
+    <TextView
+        android:id="@+id/third_child_name"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_double"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="爬去百度图片"/>
 </FrameLayout>

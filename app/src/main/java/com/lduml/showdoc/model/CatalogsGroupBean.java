@@ -18,14 +18,14 @@ import java.util.List;
 public class CatalogsGroupBean implements BaseExpandableRecyclerViewAdapter.BaseGroupBean<PagesChildBean>{
 
     private List<PagesChildBean> mlist;
-    private Catalogs mcatalogs;
+    private PaCatalogs mcatalogs;
 
-    public CatalogsGroupBean(@NonNull List<PagesChildBean> list,@NonNull Catalogs catalogs){
+    public CatalogsGroupBean(@NonNull List<PagesChildBean> list,@NonNull PaCatalogs paCatalogs){
         mlist = list;
-        mcatalogs = catalogs;
+        mcatalogs = paCatalogs;
     }
 
-    public Catalogs getCatalogs(){
+    public PaCatalogs getCatalogs(){
         return mcatalogs;
     }
 

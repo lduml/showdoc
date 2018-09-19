@@ -13,18 +13,18 @@ import java.util.List;
 public class Menu {
 
     private List<Pages> pages;
-    private List<Catalogs> catalogs;
+    private List<PaCatalogs> catalogs;
+
     public void setPages(List<Pages> pages) {
          this.pages = pages;
      }
      public List<Pages> getPages() {
          return pages;
      }
-
-    public void setCatalogs(List<Catalogs> catalogs) {
+    public void setCatalogs(List<PaCatalogs> catalogs) {
          this.catalogs = catalogs;
      }
-     public List<Catalogs> getCatalogs() {
+     public List<PaCatalogs> getCatalogs() {
          return catalogs;
      }
 

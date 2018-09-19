@@ -2,12 +2,16 @@ package com.lduml.showdoc.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lduml.showdoc.entity.ParentEntity;
+import com.google.gson.Gson;
+import com.lduml.showdoc.model.Catalogs;
+import com.lduml.showdoc.model.PaCatalogs;
+import com.lduml.showdoc.model.Pages;
 
 import java.util.List;
 
@@ -46,16 +50,32 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(final TreeAdapter.MyViewHolder holder, int position) {
-        if (list.get(position) instanceof ParentEntity){
+        //显示父视图或子视图
+        if (list.get(position) instanceof PaCatalogs){
             holder.child_name.setVisibility(View.GONE);
+            holder.third_child_name.setVisibility(View.GONE);
             holder.parent_name.setVisibility(View.VISIBLE);
-            ParentEntity parent = (ParentEntity) list.get(position);
-            holder.parent_name.setText(parent.getName());
-        }else {
+            PaCatalogs parent = (PaCatalogs) list.get(position);
+            Log.d("001", "parentEntity: "+parent.getCat_name());
+            holder.parent_name.setText(parent.getCat_name());
+        }else if (list.get(position) instanceof Catalogs){
             holder.parent_name.setVisibility(View.GONE);
+            holder.third_child_name.setVisibility(View.GONE);
             holder.child_name.setVisibility(View.VISIBLE);
-            ParentEntity.ChildEntity child = (ParentEntity.ChildEntity) list.get(position);
-            holder.child_name.setText(child.getName());
+            Catalogs child = (Catalogs) list.get(position);
+            Log.d("001", "FirstPagesEntity: "+child.getCat_name());
+            holder.child_name.setText(child.getCat_name());
+        }else if (list.get(position) instanceof Pages) {
+            holder.parent_name.setVisibility(View.GONE);
+            holder.child_name.setVisibility(View.GONE);
+            holder.third_child_name.setVisibility(View.VISIBLE);
+            Pages child = (Pages) list.get(position);
+            Log.d("001", "SecondChildPagesEntity: "+child.getPage_title());
+            holder.third_child_name.setText(child.getPage_title());
+        }else{
+            Gson gson = new Gson();
+           // gson.toJson(list.get(position))
+            Log.d("001", "else--------------: "+gson.toJson(list.get(position)));
         }
 
         if (onItemClickListener != null) {
@@ -77,10 +97,12 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView parent_name;
         private TextView child_name;
+        private TextView third_child_name;
         public MyViewHolder(View itemView) {
             super(itemView);
             parent_name = (TextView) itemView.findViewById(to[0]);
             child_name = (TextView) itemView.findViewById(to[1]);
+            third_child_name = (TextView) itemView.findViewById(to[2]);
         }
     }
 
@@ -90,8 +112,10 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.MyViewHolder>{
      * @param position
      */
     public void addAllChild(List<?> lists, int position) {
-        list.addAll(position, lists);
-        notifyItemRangeInserted(position, lists.size());
+        if(lists!=null){
+            list.addAll(position, lists);
+            notifyItemRangeInserted(position, lists.size());
+        }
     }
 
     /**

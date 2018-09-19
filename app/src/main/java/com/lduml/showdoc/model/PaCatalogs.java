@@ -1,9 +1,15 @@
+/**
+  * Copyright 2018 bejson.com 
+  */
 package com.lduml.showdoc.model;
-
 import java.util.List;
 
-/*目录下最后一级的catalog*/
-public class Catalogs {
+/**
+ * Auto-generated: 2018-09-16 8:48:13
+ *  menu下的一级catalog
+ */
+public class PaCatalogs {
+
     private String cat_id;
     private String cat_name;
     private String item_id;
@@ -11,7 +17,16 @@ public class Catalogs {
     private String addtime;
     private String parent_cat_id;
     private String level;
-    private List<Pages> pages;
+    private List<Pages> Pages;
+    private List<Catalogs> catalogs;
+
+    public List<com.lduml.showdoc.model.Pages> getPages() {
+        return Pages;
+    }
+
+    public void setPages(List<com.lduml.showdoc.model.Pages> pages) {
+        Pages = pages;
+    }
 
     public String getCat_id() {
         return cat_id;
@@ -69,12 +84,14 @@ public class Catalogs {
         this.level = level;
     }
 
-    public List<Pages> getPages() {
-        return pages;
+
+
+    public List<Catalogs> getCatalogs() {
+        return catalogs;
     }
 
-    public void setPages(List<Pages> pages) {
-        this.pages = pages;
+    public void setCatalogs(List<Catalogs> catalogs) {
+        this.catalogs = catalogs;
     }
 
     @Override
@@ -87,7 +104,8 @@ public class Catalogs {
                 ", addtime='" + addtime + '\'' +
                 ", parent_cat_id='" + parent_cat_id + '\'' +
                 ", level='" + level + '\'' +
-                ", pages=" + pages +
+                ", pages=" + Pages +
+                ", catalogs=" + catalogs +
                 '}';
     }
 }
