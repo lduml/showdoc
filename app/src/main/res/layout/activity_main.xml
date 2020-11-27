@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -13,9 +13,9 @@
         android:text=""
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="35dp" />
-    <android.support.v7.widget.RecyclerView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recy_item_data_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
