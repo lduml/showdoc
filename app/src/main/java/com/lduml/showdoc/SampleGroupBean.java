@@ -1,6 +1,8 @@
 package com.lduml.showdoc;
 
-import android.support.annotation.NonNull;
+//import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
 

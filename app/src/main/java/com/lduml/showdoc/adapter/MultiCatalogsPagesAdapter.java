@@ -1,6 +1,6 @@
 package com.lduml.showdoc.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
 import com.lduml.showdoc.R;
 import com.lduml.showdoc.SampleChildBean;
 import com.lduml.showdoc.SampleGroupBean;
+import com.lduml.showdoc.adapter.MyChildItemViewHolder;
 import com.lduml.showdoc.inter.MyOnItemClickListener;
 import com.lduml.showdoc.model.CatalogsGroupBean;
 import com.lduml.showdoc.model.PagesChildBean;

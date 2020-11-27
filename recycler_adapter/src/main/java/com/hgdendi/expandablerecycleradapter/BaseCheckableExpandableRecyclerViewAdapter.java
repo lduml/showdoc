@@ -12,8 +12,10 @@
  */
 package com.hgdendi.expandablerecycleradapter;
 
-import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashSet;
 import java.util.Iterator;

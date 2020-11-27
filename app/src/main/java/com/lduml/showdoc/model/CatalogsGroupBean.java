@@ -2,7 +2,9 @@
   * Copyright 2018 bejson.com 
   */
 package com.lduml.showdoc.model;
-import android.support.annotation.NonNull;
+//import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
 //import com.lduml.showdoc.SampleChildBean;
@@ -20,7 +22,7 @@ public class CatalogsGroupBean implements BaseExpandableRecyclerViewAdapter.Base
     private List<PagesChildBean> mlist;
     private PaCatalogs mcatalogs;
 
-    public CatalogsGroupBean(@NonNull List<PagesChildBean> list,@NonNull PaCatalogs paCatalogs){
+    public CatalogsGroupBean(@NonNull List<PagesChildBean> list, @NonNull PaCatalogs paCatalogs){
         mlist = list;
         mcatalogs = paCatalogs;
     }
